@@ -4,9 +4,12 @@ export class Stack
 {
     private _top: StackItem;
 
-    constructor(value: number)
+    constructor(value?: number)
     {
-        this._top = new StackItem(value);
+        if (value)
+            this._top = new StackItem(value);
+        else
+            this._top = null;
     }
 
     push(value: number): void
