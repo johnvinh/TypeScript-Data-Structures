@@ -4,9 +4,12 @@ export class SinglyLinkedList
 {
     private head: SLLNode;
 
-    constructor(value: number)
+    constructor(value?: number)
     {
-        this.head = new SLLNode(value);
+        if (value)
+            this.head = new SLLNode(value);
+        else
+            this.head = null;
     }
 
     print(): void
