@@ -3,6 +3,7 @@
 class QueueItem
 {
     private _previous: QueueItem;
+    private _next: QueueItem;
     private _value: number;
 
     constructor(value: number)
@@ -21,13 +22,23 @@ class QueueItem
         return this._value;
     }
 
-    set previous(next: QueueItem)
+    get getNext(): QueueItem
     {
-        this._previous = next;
+        return this._next;
+    }
+
+    set previous(previous: QueueItem)
+    {
+        this._previous = previous;
     }
 
     set value(value: number)
     {
         this._value = value;
+    }
+
+    set setNext(next: QueueItem)
+    {
+        this._next = next;
     }
 }
