@@ -1,52 +1,47 @@
-'use strict';
+import {QueueItem} from "./queue_item";
 
-class Queue
+export class Queue
 {
-    private _front: QueueItem;
-    private _back: QueueItem;
+    private front: QueueItem;
+    private back: QueueItem;
 
     constructor()
     {
-        this._front = null;
-        this._back = null;
-    }
-
-    set setFront(front: QueueItem)
-    {
-        this._front = front;
-    }
-
-    set setBack(back: QueueItem)
-    {
-        this._back = back;
-    }
-
-    get back(): QueueItem
-    {
-        return this._back;
-    }
-
-    get front(): QueueItem
-    {
-        return this._front;
+        this.front = null;
+        this.back = null;
     }
 
     enqueue(value: number): void
     {
-        const newItem: QueueItem = new QueueItem(value);
-        // new item should be both front and back if the queue is empty
-        if (!this._front && !this._back) {
-            this._front = newItem;
-            this._back = newItem;
+        const newItem = new QueueItem(value);
+        // no items in queue
+        if (!this.front && !this.back) {
+            this.front = newItem;
+            this.back = newItem;
         }
-        else
-            this._back = newItem;
+        // items in queue
+        else {
+            this.back.setPrevious = newItem;
+            newItem.setNext = this.back;
+            this.back = newItem;
+        }
     }
 
     dequeue(): QueueItem
     {
-        const oldFront: QueueItem = this._front;
-        this._front = this._front.previous;
-        return oldFront;
+        // one item in queue
+        if (this.front === this.back) {
+            const front: QueueItem = this.front;
+            this.front = null;
+            this.back = null;
+            return front;
+        }
+        // more than one item in queue
+        else {
+            const oldFront: QueueItem = this.front;
+            this.front = oldFront.previous;
+            this.front.setNext = null;
+            return oldFront;
+        }
     }
 }

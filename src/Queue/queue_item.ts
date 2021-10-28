@@ -1,45 +1,38 @@
-'use strict';
-
-class QueueItem
+export class QueueItem
 {
-    private _previous: QueueItem;
     private _next: QueueItem;
+    private _previous: QueueItem;
     private _value: number;
 
     constructor(value: number)
     {
         this._value = value;
-        this._previous = null;
         this._next = null;
+        this._previous = null;
     }
 
-    get getPrevious(): QueueItem
-    {
-        return this._previous;
-    }
-
-    get getValue(): number
-    {
-        return this._value;
-    }
-
-    get getNext(): QueueItem
+    get next(): QueueItem
     {
         return this._next;
     }
 
-    set previous(previous: QueueItem)
+    get previous(): QueueItem
     {
-        this._previous = previous;
+        return this._previous;
     }
 
-    set value(value: number)
+    get value(): number
     {
-        this._value = value;
+        return this._value;
     }
 
     set setNext(next: QueueItem)
     {
         this._next = next;
+    }
+
+    set setPrevious(previous: QueueItem)
+    {
+        this._previous = previous;
     }
 }
