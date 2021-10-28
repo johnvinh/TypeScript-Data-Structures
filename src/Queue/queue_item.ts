@@ -10,6 +10,7 @@ class QueueItem
     {
         this._value = value;
         this._previous = null;
+        this._next = null;
     }
 
     get getPrevious(): QueueItem
